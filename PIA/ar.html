@@ -235,7 +235,7 @@
                 targetIndex: 14,
                 nombre: "Bate_Yankees",
                 modelPath: "./models/bate_Yankees.glb", // <-- tu modelo del bate de los Yankees
-                scale: 0.15,          // ajusta el tamaño del modelo
+                scale: 0.40,          // ajusta el tamaño del modelo
                 rotationY: 0,         // gira el modelo si aparece de lado
                 yOffset: 0.05         // súbelo/bájalo sobre el logo
             }
@@ -465,6 +465,33 @@
         let animando = false;
         let tiempo = 0;
 
+        // MindAR calcula el tamaño del <video> y del <canvas> por su
+        // cuenta (a veces deja franjas vacías si el aspect ratio de la
+        // cámara no coincide con el del contenedor). Esto los fuerza a
+        // cubrir siempre el 100% del contenedor, recortando lo que
+        // sobre — igual que object-fit: cover.
+        function forzarVideoCompleto() {
+
+            const video = container.querySelector("video");
+            const canvases = container.querySelectorAll("canvas");
+
+            [video, ...canvases].forEach((el) => {
+
+                if (!el) return;
+
+                el.style.setProperty("position", "absolute", "important");
+                el.style.setProperty("top", "0", "important");
+                el.style.setProperty("left", "0", "important");
+                el.style.setProperty("width", "100%", "important");
+                el.style.setProperty("height", "100%", "important");
+                el.style.setProperty("object-fit", "cover", "important");
+                el.style.setProperty("margin", "0", "important");
+                el.style.setProperty("transform", "none", "important");
+
+            });
+
+        }
+
         async function iniciarAR() {
 
             permissionOverlay.style.display = "none";
@@ -473,6 +500,8 @@
             try {
 
                 await mindarThree.start();
+
+                forzarVideoCompleto();
 
                 statusText.innerText = "Buscando logo...";
                 statusHint.innerText = "Apunta al logo del equipo";
@@ -484,7 +513,13 @@
                     renderer.setAnimationLoop(() => {
 
                         tiempo += 0.02;
-                        ball.position.y = 0.18 + Math.sin(tiempo * 2) * 0.03;
+
+                        // Anima cualquier modelo de respaldo activo
+                        // (los .glb propios se animan solos si traen
+                        // sus propias animaciones/clips)
+                        objetosAnimados.forEach((obj) => {
+                            if (obj.userData.animar) obj.userData.animar(tiempo);
+                        });
 
                         renderer.render(scene, camera);
 
@@ -512,6 +547,16 @@
         document.getElementById("enableCameraBtn")
             .addEventListener("click", iniciarAR);
 
+        // MindAR recalcula el tamaño del video al rotar el celular o
+        // redimensionar la ventana, así que lo volvemos a forzar
+        // un instante después de que eso pase.
+        window.addEventListener("resize", () => {
+            setTimeout(forzarVideoCompleto, 300);
+        });
+        window.addEventListener("orientationchange", () => {
+            setTimeout(forzarVideoCompleto, 300);
+        });
+
         // Detener la cámara al salir de la vista, para no dejarla encendida
         window.addEventListener("beforeunload", () => {
             try { mindarThree.stop(); } catch (e) {}
@@ -519,6 +564,7 @@
 
         // Intentar arrancar automáticamente al cargar la página
         iniciarAR();
+
 
     </script>
 
