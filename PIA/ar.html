@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BaseAR - Realidad Aumentada</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="phone ar">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <div class="header">
+
+            <button onclick="location.href='index.html'">
+                ‹
+            </button>
+
+            <div class="title">
+                ESCANEAR LOGO
+            </div>
+
+            <button onclick="location.href='info.html'">
+                ⚡
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             INSTRUCCIONES
+        ========================== -->
+
+        <div class="instructions">
+
+            <h2>
+                Apunta al logo del equipo
+            </h2>
+
+            <p>
+                Coloca el logo dentro del marco
+                para identificarlo
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             MARCO DE ESCANEO
+        ========================== -->
+
+        <div class="scanner" id="scanner">
+
+            <div class="corner tl"></div>
+            <div class="corner tr"></div>
+            <div class="corner bl"></div>
+            <div class="corner br"></div>
+            <div class="line"></div>
+
+        </div>
+
+
+        <!-- =========================
+             MODELO AR
+        ========================== -->
+
+        <div class="model" id="model">
+
+            <div class="model-icon" id="modelIcon">
+                ⚾
+            </div>
+
+            <h3>
+                NEW YORK
+            </h3>
+
+            <p>
+                MODELO AR DETECTADO
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             ESTADO
+        ========================== -->
+
+        <div class="status">
+
+            <span class="dot" id="statusDot"></span>
+
+            <span id="status">
+                Buscando logo...
+            </span>
+
+            <p>
+                Esperando detección
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             BOTONES AR (Cámara, Confeti, Pausar)
+        ========================== -->
+
+        <div class="ar-buttons" id="arButtons">
+
+            <button class="ar-btn confetti" id="confettiBtn">
+                <span class="ar-icon">🎊</span>
+                <span class="ar-label">Confeti</span>
+            </button>
+            
+            <button class="ar-btn camera" id="cameraBtn">
+                <span class="ar-icon">📷</span>
+                <span class="ar-label">Foto</span>
+            </button>
+
+            <button class="ar-btn pause" id="pauseBtn">
+                <span class="ar-icon">⏸️</span>
+                <span class="ar-label">Pausar</span>
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             BOTÓN DE DEMOSTRACIÓN
+        ========================== -->
+
+        <button
+            class="demo"
+            id="demoButton"
+            onclick="detectar()">
+
+            Simular detección del logo
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        function detectar() {
+
+            // Ocultar marco
+            document.getElementById("scanner")
+                .style.display = "none";
+
+            // Cambiar texto
+            document.getElementById("status")
+                .innerText = "¡Logo detectado!";
+
+            document.getElementById("statusDot")
+                .style.background = "#00ff88";
+
+            // Mostrar modelo
+            document.getElementById("model")
+                .classList.add("show");
+
+            // MOSTRAR BOTONES AR (usando la clase .show)
+            document.getElementById("arButtons")
+                .classList.add("show");
+
+            // Cambiar botón
+            const button =
+                document.getElementById("demoButton");
+
+            button.innerText =
+                "Ver información del equipo";
+
+            button.onclick = function () {
+                location.href = "info.html";
+            };
+
+        }
+
+    </script>
+
+</body>
+
+</html>
