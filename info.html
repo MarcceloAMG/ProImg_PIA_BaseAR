@@ -33,7 +33,7 @@
                 <div class="arrow">›</div>
             </button>
 
-            <button class="info-option" onclick="location.href='video.html'">
+            <button class="info-option" id="btnVideo">
                 <div class="option-icon">🎥</div>
                 <div class="option-text">
                     <strong>Video</strong>
@@ -126,6 +126,9 @@
                 };
                 document.getElementById('btnHistory').onclick = function() {
                     location.href = `historia-equipo.html?team=${teamId}`;
+                };
+                document.getElementById('btnVideo').onclick = function() {
+                    location.href = `video.html?team=${teamId}`;
                 };
             } else {
                 document.getElementById('teamName').innerText = "Equipo no encontrado";
