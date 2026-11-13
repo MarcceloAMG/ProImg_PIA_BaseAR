@@ -946,6 +946,18 @@ button:hover {
     overflow-y: auto;
 }
 
+/* Añadir esto justo debajo para arreglar el scroll */
+.teams-page::-webkit-scrollbar {
+    width: 4px;
+}
+.teams-page::-webkit-scrollbar-track {
+    background: #0b1d34;
+}
+.teams-page::-webkit-scrollbar-thumb {
+    background: #328cff;
+    border-radius: 10px;
+}
+
 .league-title {
     margin: 22px 0 12px;
 
@@ -1665,189 +1677,58 @@ button:hover {
     margin-bottom: 20px;
 }
 
+/* =========================================
+   DISEÑO DE LAS BARRAS CON VALORES
+========================================= */
+
 .chart-bars {
     display: flex;
     justify-content: space-around;
-    align-items: flex-end;
+    align-items: stretch;
     height: 150px;
     gap: 12px;
+    margin-top: 25px; /* Un poco de espacio arriba para que respiren */
 }
 
 .chart-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     flex: 1;
+    height: 100%;
 }
 
 .bar {
     width: 100%;
-    max-width: 30px;
+    max-width: 35px;
     background: linear-gradient(180deg, #328cff, #1675ef);
-    border-radius: 4px 4px 0 0;
+    border-radius: 6px 6px 0 0;
     transition: 0.3s;
-    min-height: 4px;
-}
-
-.chart-bar span {
-    font-size: 11px;
-    color: #8ca1ba;
-    margin-top: 6px;
-}
-
-
-/* =========================================
-   PÁGINA DE JUEGO (SNAKE)
-========================================= */
-
-.game-page {
-    padding: 25px 20px;
-    background: linear-gradient(160deg, #071525, #0b1d34);
-    overflow-y: auto;
-}
-
-.game-score {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 15px 0;
-}
-
-.score-display {
-    background: #0e2035;
-    border-radius: 15px;
-    padding: 14px;
-    text-align: center;
-    border: 1px solid #263f5b;
-}
-
-.score-label {
-    display: block;
-    font-size: 11px;
-    color: #8ca1ba;
-    text-transform: uppercase;
-}
-
-.score-value {
-    display: block;
-    font-size: 30px;
-    font-weight: bold;
-    color: #328cff;
-}
-
-.game-board {
-    background: #0a1a2a;
-    border-radius: 16px;
-    padding: 12px;
-    border: 2px solid #263f5b;
-    margin: 10px 0;
-}
-
-.snake-grid {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 3px;
-    aspect-ratio: 1;
-}
-
-.cell {
-    background: #0e2035;
-    border-radius: 4px;
-    aspect-ratio: 1;
+    min-height: 15px; /* Altura mínima para que quepa el texto si el valor es bajo */
+    
+    /* Flexbox para centrar el texto dentro de la barra */
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 14px;
+    align-items: flex-start; /* Lo alinea arriba */
 }
 
-.cell.empty {
-    background: #0e2035;
+/* El texto del valor (ej. 45%) */
+.bar-value {
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 4px; /* Separación del borde superior de la barra */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Sombra para que se lea mejor */
 }
 
-.cell.snake-head {
-    background: linear-gradient(135deg, #328cff, #1675ef);
-    border-radius: 6px;
-    color: white;
+/* El texto del mes (ej. Abr) */
+.bar-month {
     font-size: 12px;
+    color: #8ca1ba;
+    margin-top: 8px;
+    font-weight: 500;
 }
-
-.cell.snake-body {
-    background: #1a4a7a;
-    border-radius: 4px;
-    font-size: 12px;
-}
-
-.cell.food {
-    background: #0e2035;
-    font-size: 18px;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.game-controls {
-    margin: 15px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.control-row {
-    display: flex;
-    gap: 6px;
-}
-
-.game-controls .control-btn {
-    width: 60px;
-    height: 60px;
-    border-radius: 14px;
-    font-size: 20px;
-    background: #0e2035;
-    border: 1px solid #263f5b;
-    color: #d2deeb;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.game-controls .control-btn:hover {
-    background: #1a3a5a;
-    border-color: #328cff;
-    transform: translateY(-2px);
-}
-
-.game-controls .control-btn.restart {
-    width: auto;
-    padding: 0 25px;
-    height: 45px;
-    font-size: 14px;
-    background: #1675ef;
-    border: none;
-    color: white;
-}
-
-.game-controls .control-btn.restart:hover {
-    background: #328cff;
-}
-
-.game-prize {
-    background: linear-gradient(135deg, #1a3a2a, #0e2035);
-    border: 1px solid #00b894;
-    border-radius: 14px;
-    padding: 14px;
-    text-align: center;
-    margin-top: 10px;
-    color: #55efc4;
-    font-size: 13px;
-}
-
-.prize-icon {
-    margin-right: 8px;
-}
-
 
 /* =========================================
    PÁGINA DE HISTORIA DEL EQUIPO
@@ -2456,4 +2337,459 @@ button:hover {
 /* Espacio entre el botón de escaneo de cada división y su lista */
 .ar-top-button + .teams-list {
     margin-top: 12px;
+}
+
+/* =========================================
+   ACTUALIZACIONES PARA EL JUEGO SNAKE
+========================================= */
+
+/* Asegurar que el tablero quepa bien en pantalla */
+.game-board {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.snake-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 2px; /* Espacio más pequeño entre celdas */
+    aspect-ratio: 1;
+    background: #0a1a2a;
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.cell {
+    background: #0e2035;
+    border-radius: 3px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.cell.snake-head {
+    background: linear-gradient(135deg, #328cff, #1675ef);
+    border-radius: 5px;
+    font-size: 12px;
+    box-shadow: 0 0 10px #1675ef;
+}
+
+.cell.snake-body {
+    background: #1a4a7a;
+    border-radius: 3px;
+}
+
+/* El premio desbloqueable */
+.reward-gradient {
+    background: linear-gradient(135deg, #2b1055, #7597de) !important;
+    box-shadow: 0 0 50px rgba(117, 151, 222, 0.4) !important;
+    transition: background 1s ease, box-shadow 1s ease;
+}
+
+/* Ajuste al mensaje de premio */
+.game-prize {
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajuste a los botones de control */
+.game-controls .control-btn {
+    user-select: none; /* Evita que se seleccione el texto al tocar rápido */
+}
+
+/* Ajuste del header para que no estorbe */
+.game-page .info-header {
+    margin-bottom: 10px;
+}
+
+/* =========================================
+   FONDOS DESBLOQUEABLES (NIVELES SNAKE)
+========================================= */
+
+/* Nivel 1: Neón (Morado/Azul) */
+body.reward-level-1 .phone,
+body.reward-level-1 .phone-scroll {
+    background: linear-gradient(135deg, #2b1055, #7597de) !important;
+    box-shadow: 0 0 50px rgba(117, 151, 222, 0.4) !important;
+    transition: background 1s ease, box-shadow 1s ease;
+}
+
+/* =========================================
+   NIVEL 2: FONDO VINO + SCROLL MORADO NEÓN
+========================================= */
+
+/* 1. Fondo vino sólido */
+body.reward-level-2 .phone,
+body.reward-level-2 .phone-scroll,
+body.reward-level-2 .info,
+body.reward-level-2 .teams-page,
+body.reward-level-2 .game-page,
+body.reward-level-2 .trivia-page,
+body.reward-level-2 .stats-page,
+body.reward-level-2 .video-page,
+body.reward-level-2 .gallery-page,
+body.reward-level-2 .team-history-page,
+body.reward-level-2 .history-page {
+    background: #4a0e1c !important; /* Color vino profundo */
+    border-color: #c400ff !important; /* Borde morado neón */
+    box-shadow: 0 0 40px rgba(196, 0, 255, 0.4) !important; /* Brillo morado exterior */
+}
+
+/* Excepción para la cámara AR (para que no se rompa) */
+body.reward-level-2 .ar {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. Textos blancos para que resalten en el fondo vino */
+body.reward-level-2 .info-header h2,
+body.reward-level-2 .league-title,
+body.reward-level-2 .scan-label,
+body.reward-level-2 .team-data h1,
+body.reward-level-2 .team-data p {
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); /* Sombra para mejor lectura */
+}
+
+/* Botón de "volver" con brillo morado */
+body.reward-level-2 .info-header .back {
+    border-color: #c400ff !important;
+    color: #c400ff !important;
+    background: rgba(196, 0, 255, 0.1) !important;
+}
+
+/* 3. Tarjetas interiores oscuras con un sutil tinte vino */
+body.reward-level-2 .team-option,
+body.reward-level-2 .info-option,
+body.reward-level-2 .score-display,
+body.reward-level-2 .game-board,
+body.reward-level-2 .stat-card,
+body.reward-level-2 .stats-players,
+body.reward-level-2 .stats-chart,
+body.reward-level-2 .trivia-question {
+    background: #14070c !important; /* Casi negro, pero con un toque vino */
+    border-color: #7a1044 !important; /* Borde vino intermedio */
+}
+
+/* 4. SCROLL MORADO NEÓN */
+body.reward-level-2 ::-webkit-scrollbar-thumb {
+    background: #c400ff !important; /* Morado neón brillante */
+    border-radius: 10px !important;
+}
+body.reward-level-2 ::-webkit-scrollbar-track {
+    background: #2b0411 !important; /* Riel vino muy oscuro */
+}
+/* Nivel 3: Dorado */
+body.reward-level-3 .phone,
+body.reward-level-3 .phone-scroll {
+    background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) !important;
+    box-shadow: 0 0 50px rgba(191, 149, 63, 0.6) !important;
+    transition: background 1s ease, box-shadow 1s ease;
+}
+
+/* Ajuste para que la UI se lea bien sobre los fondos claros (Béisbol y Oro) */
+body.reward-level-2 .info-header h2,
+body.reward-level-3 .info-header h2 {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   OVERLAY DE NIVEL SUPERADO
+========================================= */
+.level-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    background: rgba(4, 10, 20, 0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.level-card {
+    background: #0e2035;
+    border: 2px solid #328cff;
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: popIn 0.3s ease;
+}
+
+.level-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.level-card p {
+    color: #a0b8d0;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+/* =========================================
+   CONTROLES DEL JUEGO SNAKE (BOTONES GRANDES)
+========================================= */
+
+.game-controls {
+    margin: 20px 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px; /* Espacio entre filas */
+}
+
+.control-row {
+    display: flex;
+    gap: 12px; /* Espacio entre botones */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botones cuadrados grandes (80x80) para uso táctil */
+.game-controls .control-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    font-size: 32px; /* Flechas grandes */
+    background: #0e2035;
+    border: 2px solid #263f5b;
+    color: #d2deeb;
+    cursor: pointer;
+    transition: 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Evita selección de texto o zoom accidental en móviles */
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+/* Feedback al presionar */
+.game-controls .control-btn:active {
+    background: #1a3a5a;
+    border-color: #328cff;
+    transform: scale(0.92);
+}
+
+/* Botón de reiniciar (más ancho para el texto) */
+.game-controls .control-btn.restart {
+    width: 130px;
+    height: 80px;
+    font-size: 16px;
+    background: #1675ef;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.game-controls .control-btn.restart:active {
+    background: #328cff;
+}
+
+
+/* =========================================
+   CORRECCIÓN DE INTERFAZ - JUEGO SNAKE
+========================================= */
+
+/* 1. Más aire arriba para que el header respire */
+.game-page {
+    padding: 30px 20px 25px;
+}
+
+/* 2. Header con separación adecuada y botón de volver visible */
+.game-page .info-header {
+    margin-bottom: 20px;
+}
+
+.game-page .info-header h2 {
+    font-size: 22px;
+}
+
+.game-page .info-header .back {
+    background: rgba(50, 140, 255, 0.15);
+    border: 1px solid #328cff;
+}
+
+/* 3. Tarjetas de nivel/progreso con gradiente sutil */
+.game-page .game-score {
+    margin: 0 0 20px;
+}
+
+.game-page .score-display {
+    background: linear-gradient(135deg, #0e2035 0%, #163250 100%);
+    border: 1px solid #263f5b;
+}
+
+/* 4. Botones de control GRANDES (80x80) */
+.game-controls {
+    margin: 20px 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.control-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-controls .control-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    font-size: 32px;
+    background: #0e2035;
+    border: 2px solid #263f5b;
+    color: #d2deeb;
+    cursor: pointer;
+    transition: 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.game-controls .control-btn:active {
+    background: #1a3a5a;
+    border-color: #328cff;
+    transform: scale(0.92);
+}
+
+.game-controls .control-btn.restart {
+    width: 130px;
+    height: 80px;
+    font-size: 16px;
+    background: #1675ef;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.game-controls .control-btn.restart:active {
+    background: #328cff;
+}
+
+
+/* =========================================
+   TARJETAS DE NIVEL Y PROGRESO (SNAKE)
+========================================= */
+
+.game-score {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 0 0 20px 0; /* Espacio debajo de las tarjetas */
+}
+
+.score-display {
+    background: #0e2035; /* Fondo azul muy oscuro */
+    border-radius: 16px; /* Bordes redondeados */
+    padding: 16px 10px;
+    text-align: center;
+    border: 1px solid #263f5b; /* Borde sutil */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #8ca1ba; /* Gris azulado */
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Letras más espaciadas */
+    margin-bottom: 4px; /* Separación del número */
+}
+
+.score-value {
+    display: block;
+    font-size: 34px; /* Número grande */
+    font-weight: bold;
+    color: #328cff; /* Azul brillante */
+    line-height: 1.1;
+}
+
+/* Ajuste específico para el texto "1 / 10" para que no se desborde */
+.score-value span {
+    font-size: 28px; 
+}
+
+/* =========================================
+   ESTILOS PARA LOS LOGOS DE IMAGEN
+========================================= */
+
+/* Ajusta la imagen dentro de los círculos blancos grandes (Info e Historia) */
+.team-logo img,
+.team-banner-logo img {
+    width: 75%; /* Ocupa el 75% del círculo */
+    height: 75%;
+    object-fit: contain; /* Evita que la imagen se estire o deforme */
+}
+
+/* Ajusta la imagen dentro de los recuadros pequeños de la lista de equipos */
+.team-logo-placeholder img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+/* Asegura que el fondo del círculo sea blanco para que resalten los logos */
+.team-logo,
+.team-banner-logo,
+.team-logo-placeholder {
+    background-color: #ffffff !important;
+}
+
+/* =========================================
+   CORRECCIÓN CRÍTICA PARA LAS IMÁGENES DE LOGOS
+========================================= */
+
+/* 1. Aseguramos que los contenedores de logos tengan límites estrictos */
+.team-logo,
+.team-banner-logo,
+.team-logo-placeholder {
+    position: relative;
+    overflow: hidden !important; /* Corta cualquier cosa que intente salirse */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 2. Forzamos a que las imágenes se adapten al tamaño de su contenedor */
+.team-logo img,
+.team-banner-logo img,
+.team-logo-placeholder img,
+img.team-logo-img {
+    max-width: 80% !important;
+    max-height: 80% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important; /* Evita que se deformen */
+    display: block;
 }
